@@ -1,0 +1,90 @@
+.homepage-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.trips-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.trip-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.trip-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+
+.trip-card h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.trip-card p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.trip-card button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+/* Yeh CSS neeche add kar do */
+
+.header {
+    position: fixed;
+    top:0;
+    left:0;
+
+  display: flex;
+background-color: #1e1e2f;
+  align-items: center;
+  padding: 10px 20px;
+    justify-content: space-between;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;   
+  
+  width:100%;
+
+}
+
+.admin-link {
+  
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.admin-link:hover {
+  background-color: #0056b3;
+}
+.header svg {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.header svg:hover {
+  transform: scale(1.2); /* icon hover effect */
+}

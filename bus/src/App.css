@@ -1,0 +1,154 @@
+body {
+  font-family: sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.trip-container {
+  width: 80%;
+  max-width: 600px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Assuming 4 seats per row */
+  gap: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+.seat {
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.seat.available {
+  background-color: #a5d6a7; /* Green */
+  border: 1px solid #4caf50;
+}
+.seat.available:hover {
+  background-color: #81c784;
+}
+
+.seat.held {
+  background-color: #ffcc80; /* Orange */
+  border: 1px solid #ffa726;
+  cursor: not-allowed;
+}
+
+.seat.sold {
+  background-color: #ef9a9a; /* Red */
+  border: 1px solid #f44336;
+  cursor: not-allowed;
+  color: white;
+}
+/* ... keep all your existing styles ... */
+
+.trip-page-layout {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.left-panel {
+  flex: 2; /* Takes up 2/3 of the space */
+}
+
+.right-panel {
+  flex: 1; /* Takes up 1/3 of the space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trip-details-box, .checkout-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.trip-details-box h3, .checkout-box h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.95em;
+}
+
+.held-seat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.purchase-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.purchase-button:hover {
+  background-color: #218838;
+}
+
+.purchase-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.countdown-timer {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #d9534f;
+  margin: 10px 0;
+}
+.seat.held {
+  background-color: #ffcc80; /* Orange */
+  border: 1px solid #ffa726;
+  cursor: not-allowed;
+}
+
+/* NEW CLASS */
+.seat.my-hold {
+  background-color: #64b5f6; /* Blue */
+  border: 2px solid #1976d2;
+  cursor: not-allowed;
+}
