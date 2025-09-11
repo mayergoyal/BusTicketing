@@ -38,9 +38,7 @@ const HomePage = () => {
             ADD TRIPS
           </Link>
         </div>
-        <div className="right">
-          <FontAwesomeIcon icon={faVanShuttle} size="3x" />
-        </div>
+        
       </div>
       <div className="homepage-container">
         <h1>Available Bus Trips</h1>
