@@ -32,7 +32,7 @@ const io = new Server(server, {
 
 // 1. API Routes
 // Note: File ka naam 'trips.js' hona behtar hai, 'Trip.js' ki jagah
-const tripRoutes = require("./routes/trips");
+const tripRoutes = require("./routes/Trip");
 const bookingRoutes = require("./routes/bookings")(io);
 app.use("/api/trips", tripRoutes);
 app.use("/api/bookings", bookingRoutes);
