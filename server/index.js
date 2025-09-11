@@ -30,7 +30,7 @@ const io = new Server(server, {
 
 // API Routes
 // FIX: File ka naam 'trips.js' (sab small) hona chahiye
-const tripRoutes = require("./routes/trips"); 
+const tripRoutes = require("./routes/Trip"); 
 const bookingRoutes = require("./routes/bookings")(io);
 app.use("/api/trips", tripRoutes);
 app.use("/api/bookings", bookingRoutes);
