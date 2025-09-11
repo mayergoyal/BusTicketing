@@ -3,7 +3,7 @@ require("dotenv").config();
 const sgMail = require("@sendgrid/mail");
 const PDFDocument = require("pdfkit");
 
-sgMail.setApiKey(process.env.SENDGRIDAPI);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function sendBookingConfirmation(bookingDetails, userEmail) {
   // 1. Generate PDF in memory
