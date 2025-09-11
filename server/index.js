@@ -8,14 +8,14 @@ const path = require("path");
 const sequelize = require("./db");
 const redis = require("./redis");
 
-// Models (yeh sure karein ki models sync hone se pehle import ho gaye hain)
-const Trip = require("./models/Trip");
-const Seat = require("./models/Seat");
-const Booking = require("./models/Booking");
+// Models
+require("./models/Trip");
+require("./models/Seat");
+require("./models/Booking");
 
 const app = express();
 
-// Basic Middleware
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -23,39 +23,35 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // Production mein ise apne frontend URL se replace karein
-    methods: ["GET", "POST"],
-  },
+    origin: "*", // Best to replace with your frontend URL in production
+    methods: ["GET", "POST"]
+  }
 });
 
-// --- CORRECT ORDER FOR ROUTES ---
-
-// 1. API Routes
-// Note: File ka naam 'trips.js' hona behtar hai, 'Trip.js' ki jagah
-const tripRoutes = require("./routes/Trip");
+// API Routes
+// FIX: File ka naam 'trips.js' (sab small) hona chahiye
+const tripRoutes = require("./routes/trips"); 
 const bookingRoutes = require("./routes/bookings")(io);
 app.use("/api/trips", tripRoutes);
 app.use("/api/bookings", bookingRoutes);
 
-// 2. Serve Static Files (React App)
-// Yeh API routes ke baad aana chahiye
+// --- Production Frontend Serving ---
 app.use(express.static(path.join(__dirname, "public")));
-
-// 3. The "Catch-all" handler for Single Page Aplication (SPA)
-// Yeh sabse aakhir mein hona chahiye
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Database Sync
 sequelize.sync({ alter: true }).then(() => {
   console.log("All models were synchronized successfully.");
+}).catch(err => {
+  console.error('Failed to sync database:', err);
 });
 
 // WebSocket Logic
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
-
+  // ... baaki ka WebSocket logic ...
   socket.on("joinTripRoom", (tripId) => {
     socket.join(tripId);
     console.log(`User ${socket.id} joined room for trip ${tripId}`);
@@ -63,24 +59,12 @@ io.on("connection", (socket) => {
 
   socket.on("holdSeat", async ({ tripId, seatId, userId }) => {
     const key = `trip:${tripId}:seat:${seatId}`;
-    const HOLD_DURATION_SECONDS = 300; // 5 minutes
+    const HOLD_DURATION_SECONDS = 300;
 
-    const result = await redis.set(
-      key,
-      userId,
-      "EX",
-      HOLD_DURATION_SECONDS,
-      "NX"
-    );
+    const result = await redis.set(key, userId, "EX", HOLD_DURATION_SECONDS, "NX");
 
     if (result === "OK") {
-      const holdExpiresAt = new Date(Date.now() + HOLD_DURATION_SECONDS * 1000);
-      io.to(tripId).emit("seatStatusUpdate", {
-        seatId,
-        status: "held",
-        userId,
-        holdExpiresAt: holdExpiresAt.toISOString(),
-      });
+      io.to(tripId).emit("seatStatusUpdate", { seatId, status: "held", userId });
     } else {
       socket.emit("holdFailed", { seatId, message: "Seat is already held." });
     }
