@@ -4,9 +4,8 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: DATABASE_URL
-        value: YOUR_SUPABASE_URL_HERE
-      - key: REDIS_URL
-        value: YOUR_REDIS_URL_HERE
-      - key: SENDGRID_API_KEY
-        value: YOUR_SENDGRID_KEY_HERE
+      - key: DATABASE_URL       # Value Render ke dashboard se aayegi
+      - key: REDIS_URL          # Value Render ke dashboard se aayegi
+      - key: SENDGRID_API_KEY   # Value Render ke dashboard se aayegi
+      - key: PORT
+        value: "3001"           # Yeh secret nahi hai, toh yahan rakh sakte hain
