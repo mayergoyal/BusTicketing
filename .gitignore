@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+/bus/node_modules
+/server/node_modules
+
+# Environment Variables
+.env
+.env.*
+bus/.env
+server/.env
+
+# Build output
+/bus/dist

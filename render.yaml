@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: BusTicketing-1
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: YOUR_SUPABASE_URL_HERE
+      - key: REDIS_URL
+        value: YOUR_REDIS_URL_HERE
+      - key: SENDGRID_API_KEY
+        value: YOUR_SENDGRID_KEY_HERE
