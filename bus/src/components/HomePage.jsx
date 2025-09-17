@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate ,Link } from "react-router-dom";
 import "./HomePage.css";
-const API_URL = "http://localhost:3001";
+const API_URL = import.meta.env.PROD ? "" : "http://localhost:3001";
 const HomePage = () => {
     const [trips, setTrips] = useState([]);
     const [loading, setLoading] = useState(true);
